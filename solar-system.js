@@ -1,5 +1,5 @@
-const speedMultiplier = 1.5;
-const radiusMultiplier = 1.2;
+const speedMultiplier = 1;
+const radiusMultiplier = 1;
 const sizeMultiplier = 1;
 
 const celestialBodies = [
@@ -8,7 +8,7 @@ const celestialBodies = [
     radius: 0 * radiusMultiplier,
     speed: 0 * speedMultiplier,
     size: 3 * sizeMultiplier,
-  }, // The sun is three times the base size
+  },
   {
     name: "mercury",
     radius: 120 * radiusMultiplier,
@@ -65,47 +65,103 @@ const celestialBodies = [
     speed: 0.001 * speedMultiplier,
     size: 1.1 * sizeMultiplier,
   },
+  {
+    name: "pluto",
+    radius: 400 * radiusMultiplier,
+    speed: 0.0006 * speedMultiplier,
+    size: 0.6 * sizeMultiplier,
+  },
+  {
+    name: "phobos",
+    radius: 26 * radiusMultiplier,
+    speed: 0.056 * speedMultiplier,
+    revolvesAround: "mars",
+    initialAngle: Math.random() * 2 * Math.PI,
+    size: 0.2 * sizeMultiplier,
+  },
+  {
+    name: "deimos",
+    radius: 40 * radiusMultiplier,
+    speed: 0.027 * speedMultiplier,
+    revolvesAround: "mars",
+    initialAngle: Math.random() * 2 * Math.PI,
+    size: 0.2 * sizeMultiplier,
+  },
+  {
+    name: "io",
+    radius: 50 * radiusMultiplier,
+    speed: 0.045 * speedMultiplier,
+    revolvesAround: "jupiter",
+    initialAngle: Math.random() * 2 * Math.PI,
+    size: 0.3 * sizeMultiplier,
+  },
 ];
 
+const speedInput = document.getElementById("speedMultiplier");
+const radiusInput = document.getElementById("radiusMultiplier");
+const sizeInput = document.getElementById("sizeMultiplier");
 const solarSystemDom = document.getElementById("solar-system");
-
-function calculatePosition(body, angle) {
-  let parentDom;
-  if (body.revolvesAround) {
-    parentDom = document.getElementById(body.revolvesAround);
-  } else {
-    parentDom = solarSystemDom;
-  }
-
-  const parentRect = parentDom.getBoundingClientRect();
-  const x =
-    parentRect.left +
-    parentRect.width / 2 -
-    (body.size * 1) / 2 +
-    body.radius * Math.cos(angle);
-  const y =
-    parentRect.top +
-    parentRect.height / 2 -
-    (body.size * 1) / 2 +
-    body.radius * Math.sin(angle);
-
-  return { x, y };
-}
+const parents = {};
 
 celestialBodies.forEach((body) => {
   let angle =
-    body.name === "moon" ? body.initialAngle : Math.random() * 2 * Math.PI;
+    body.initialAngle !== undefined
+      ? body.initialAngle
+      : Math.random() * 2 * Math.PI;
   let dom = document.getElementById(body.name);
 
   function updatePosition() {
     let position = calculatePosition(body, angle);
+
     dom.style.left = `${position.x}px`;
     dom.style.top = `${position.y}px`;
+
+    if (!body.revolvesAround) {
+      parents[body.name] = position;
+    }
 
     angle += body.speed;
     requestAnimationFrame(updatePosition);
   }
 
-  // Call the updatePosition function for each celestial body
   updatePosition();
 });
+
+function calculatePosition(body, angle) {
+  let parentPos;
+  if (body.revolvesAround) {
+    parentPos = parents[body.revolvesAround];
+  } else {
+    const rect = solarSystemDom.getBoundingClientRect();
+    parentPos = {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    };
+  }
+
+  const x = parentPos.x + body.radius * Math.cos(angle);
+  const y = parentPos.y + body.radius * Math.sin(angle);
+
+  return { x, y };
+}
+
+function applyChanges(event) {
+  event.preventDefault();
+
+  const speedMultiplier = parseFloat(speedInput.value);
+  const radiusMultiplier = parseFloat(radiusInput.value);
+  const sizeMultiplier = parseFloat(sizeInput.value);
+
+  celestialBodies.forEach((body) => {
+    body.speed = body.speed * speedMultiplier;
+    body.radius = body.radius * radiusMultiplier;
+    body.size = body.size * sizeMultiplier;
+  });
+
+  // Re-render the celestial bodies with updated values
+  celestialBodies.forEach((body) => {
+    // Same rendering code as before...
+  });
+}
+
+document.getElementById("controls").addEventListener("submit", applyChanges);
