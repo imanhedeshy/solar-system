@@ -1,0 +1,94 @@
+body {
+  background-color: black;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+#solar-system {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.celestial-body {
+  background-size: cover;
+  border-radius: 50%;
+  position: absolute;
+}
+
+#sun {
+  background-image: url("./assets/sun.svg");
+  width: 6rem; /* Sun is three times the base size */
+  height: 6rem;
+  transform: translate(-50%, -50%);
+}
+
+#mercury {
+  background-image: url("./assets/mercury.svg");
+  width: 1.4rem; /* 70% of base size */
+  height: 1.4rem;
+}
+
+#venus {
+  background-image: url("./assets/venus.svg");
+  width: 1.8rem; /* 90% of base size */
+  height: 1.8rem;
+}
+
+#earth {
+  background-image: url("./assets/earth.svg");
+  width: 2rem; /* 100% of base size */
+  height: 2rem;
+}
+
+#moon {
+  background-image: url("./assets/moon.svg");
+  width: 0.4rem; /* 20% of base size */
+  height: 0.4rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#mars {
+  background-image: url("./assets/mars.svg");
+  width: 1.6rem; /* 80% of base size */
+  height: 1.6rem;
+}
+
+#jupiter {
+  background-image: url("./assets/jupiter.svg");
+  width: 2.6rem; /* 130% of base size */
+  height: 2.6rem;
+}
+
+#saturn {
+  background-image: url("./assets/saturn.svg");
+  width: 2.4rem; /* 120% of base size */
+  height: 2.4rem;
+}
+
+#uranus {
+  background-image: url("./assets/uranus.svg");
+  width: 2.2rem; /* 110% of base size */
+  height: 2.2rem;
+}
+
+#neptune {
+  background-image: url("./assets/neptune.svg");
+  width: 2.2rem; /* 110% of base size */
+  height: 2.2rem;
+}
+
+.planet {
+  transform: translate(-50%, -50%);
+}/*# sourceMappingURL=styles.css.map */

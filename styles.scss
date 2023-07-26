@@ -1,0 +1,96 @@
+$base-size: 2rem;
+
+body {
+  background-color: black;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+#solar-system {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.celestial-body {
+  background-size: cover;
+  border-radius: 50%;
+  position: absolute;
+}
+
+#sun {
+  background-image: url("./assets/sun.svg");
+  width: 6rem; /* Sun is three times the base size */
+  height: 6rem;
+  transform: translate(-50%, -50%);
+}
+
+#mercury {
+  background-image: url("./assets/mercury.svg");
+  width: 0.7 * $base-size; /* 70% of base size */
+  height: 0.7 * $base-size;
+}
+
+#venus {
+  background-image: url("./assets/venus.svg");
+  width: 0.9 * $base-size; /* 90% of base size */
+  height: 0.9 * $base-size;
+}
+
+#earth {
+  background-image: url("./assets/earth.svg");
+  width: $base-size; /* 100% of base size */
+  height: $base-size;
+}
+
+#moon {
+  background-image: url("./assets/moon.svg");
+  width: 0.2 * $base-size; /* 20% of base size */
+  height: 0.2 * $base-size;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#mars {
+  background-image: url("./assets/mars.svg");
+  width: 0.8 * $base-size; /* 80% of base size */
+  height: 0.8 * $base-size;
+}
+
+#jupiter {
+  background-image: url("./assets/jupiter.svg");
+  width: 1.3 * $base-size; /* 130% of base size */
+  height: 1.3 * $base-size;
+}
+
+#saturn {
+  background-image: url("./assets/saturn.svg");
+  width: 1.2 * $base-size; /* 120% of base size */
+  height: 1.2 * $base-size;
+}
+
+#uranus {
+  background-image: url("./assets/uranus.svg");
+  width: 1.1 * $base-size; /* 110% of base size */
+  height: 1.1 * $base-size;
+}
+
+#neptune {
+  background-image: url("./assets/neptune.svg");
+  width: 1.1 * $base-size; /* 110% of base size */
+  height: 1.1 * $base-size;
+}
+
+.planet {
+  transform: translate(-50%, -50%);
+}
