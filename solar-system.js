@@ -158,10 +158,7 @@ function applyChanges(event) {
     body.size = body.size * sizeMultiplier;
   });
 
-  // Re-render the celestial bodies with updated values
-  celestialBodies.forEach((body) => {
-    // Same rendering code as before...
-  });
+
 }
 
 document.getElementById("controls").addEventListener("submit", applyChanges);
